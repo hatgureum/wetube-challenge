@@ -1,0 +1,9 @@
+extends templates/layout
+
+block content 
+    h1=pageTitle
+    form(method="POST")
+        input(name="title", placeholder="Title", type="text", required)
+        input(name="synopsis", placeholder="Synopsis", type="text", required)
+        input(name="genres", placeholder="Genres (Please split by comma)", type="text", required)
+        input(value="Add Movie", type="submit")

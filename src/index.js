@@ -13,7 +13,7 @@ app.use(localsMiddleware);
 app.use("/", movieRouter);
 
 // Codesanbox does not need PORT :)
-const PORT = 4001;
+const PORT = 4002;
 app.listen(PORT, () =>
   console.log(`✅  Server Ready! http://localhost:${PORT}`)
 );
