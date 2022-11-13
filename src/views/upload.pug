@@ -1,0 +1,12 @@
+extends layouts/layout
+
+block content 
+    if errmsg
+        span=errmsg
+    form(method="POST")
+        input(name="title" placeholder="Title" type="text" requied)
+        input(name="summary" placeholder="Summary" type="text" required)
+        input(name="year" placeholder="Year" type="number" required)
+        input(name="rating" placeholder="Rating" type="number" required)
+        input(name="genres" placeholder="Genres (Please split them by comma)" type="text" required)
+        input(type="submit" value="Upload")
