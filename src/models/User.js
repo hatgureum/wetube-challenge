@@ -10,7 +10,11 @@ WE NEED TO SHARE THE SAME DB SO NICO CAN CHECK OUT EVERYBODYS PROJECT.
 */
 const YOUR_USERNAME = "cryoon";
 
-const UserSchema = mongoose.Schema({});
+const UserSchema = mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  password: { type: String, required: true },
+});
 
 if (YOUR_USERNAME === null || typeof YOUR_USERNAME !== "string") {
   /*
