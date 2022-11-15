@@ -1,14 +1,4 @@
-extends layouts/layout
-include mixins/mixin
+extends templates/layout
 
-block content 
-    nav
-        ul 
-            li 
-                a(href="upload") Upload
-            li 
-                a(href="/search") Search
-    each movie in movies
-        +mixinMovie(movie)
-    else 
-        li Sorry. No movies found.
+block content
+  h1 Add your magic here
