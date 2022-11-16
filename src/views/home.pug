@@ -1,7 +1,10 @@
 extends templates/layout
 
 block content
-  div 
-    a(href="/join") Join 
-  div
-    a(href="/login") Login
+  if loggedIn
+    span Hello, #{loggedInUser.username}!
+  else
+    div 
+      a(href="/join") Join 
+      br
+      a(href="/login") Login

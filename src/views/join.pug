@@ -1,10 +1,8 @@
 extends templates/layout
 
 block content
-  div 
-    a(href="/join") Join 
-    br
-    a(href="/login") Login
+  a(href="/login") Login
+  br
   if errmsg 
     span=errmsg
   div

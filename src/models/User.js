@@ -9,7 +9,7 @@ PLEASE FOLLOW THIS STEP
 WE NEED TO SHARE THE SAME DB SO NICO CAN CHECK OUT EVERYBODYS PROJECT.
 🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
 */
-const YOUR_USERNAME = "cryoon";
+const YOUR_USERNAME = "hatgureum";
 
 const UserSchema = mongoose.Schema({
   username: { type: String, required: true, unique: true },
@@ -32,10 +32,10 @@ if (YOUR_USERNAME.includes("@")) {
   throw Error("❌  Please remove the @ from your username  ❌");
 }
 
-const model = mongoose.model(`User_${YOUR_USERNAME}`, UserSchema);
-
 UserSchema.pre("save", async function () {
   this.password = await bcrypt.hash(this.password, 5);
 });
+
+const model = mongoose.model(`User_${YOUR_USERNAME}`, UserSchema);
 
 export default model;

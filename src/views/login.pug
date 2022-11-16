@@ -1,0 +1,12 @@
+extends templates/layout
+
+block content
+  a(href="/join") Join 
+  br
+  if errmsg 
+    span=errmsg
+  div
+    form(method="POST")
+        input(name="username" required type="text" placeholder="Username")
+        input(name="password" required type="password" placeholder="Password")
+        input(type="submit" value="Login")

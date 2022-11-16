@@ -9,36 +9,33 @@ import bcrypt from "bcrypt";
 
 // Add your magic here!
 export const home = async (req, res) => {
-  return res.render("home", { pageTitle: "Home", siteTitle: "Wetube" });
+  return res.render("home", { pageTitle: "Home" });
 };
 export const getJoin = async (req, res) => {
-  return res.render("join", { pageTitle: "Join", siteTitle: "Wetube" });
+  return res.render("join", { pageTitle: "Join" });
 };
 export const postJoin = async (req, res) => {
   const { username, name, password, password2 } = req.body;
-
+  const pageTitle = "Join";
   try {
     const exist = await User.findOne({ username });
     if (exist) {
-      return res.render("join", {
-        pageTitle: "Join",
-        siteTitle: "Wetube",
+      return res.status(400).render("join", {
+        pageTitle,
         errmsg: "The username already exists",
       });
     }
 
     if (password !== password2) {
-      return res.render("join", {
-        pageTitle: "Join",
-        siteTitle: "Wetube",
+      return res.status(400).render("join", {
+        pageTitle,
         errmsg: "wrong password confirmation",
       });
     }
   } catch (error) {
     console.log(error);
     return res.render("join", {
-      pageTitle: "Join",
-      siteTitle: "Wetbue",
+      pageTitle,
       errmsg: error.errmsg,
     });
   }
@@ -49,7 +46,34 @@ export const postJoin = async (req, res) => {
     password,
   });
 
+  return res.redirect("/login");
+};
+
+export const getLogin = async (req, res) => {
+  return res.render("login", { pageTitle: "Login" });
+};
+
+export const postLogin = async (req, res) => {
+  const pageTitle = "Login";
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  if (!user) {
+    return res.render("login", {
+      pageTitle,
+      errmsg: "The username does not exist.",
+    });
+  }
+
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    return res.render("login", {
+      pageTitle,
+      errmsg: "wrong password",
+    });
+  }
+
+  req.session.loggedIn = true;
+  req.session.user = user;
+
   return res.redirect("/");
 };
-export const getLogin = async (req, res) => {};
-export const postLogin = async (req, res) => {};
