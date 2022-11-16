@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 /*
 PLEASE ADD YOUR USERNAME IN THIS LINE.
@@ -32,5 +33,9 @@ if (YOUR_USERNAME.includes("@")) {
 }
 
 const model = mongoose.model(`User_${YOUR_USERNAME}`, UserSchema);
+
+UserSchema.pre("save", async function () {
+  this.password = await bcrypt.hash(this.password, 5);
+});
 
 export default model;

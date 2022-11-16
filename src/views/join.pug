@@ -5,6 +5,8 @@ block content
     a(href="/join") Join 
     br
     a(href="/login") Login
+  if errmsg 
+    span=errmsg
   div
     form(method="POST")
         input(name="username" required type="text" placeholder="Username")
